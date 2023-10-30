@@ -14,9 +14,13 @@ Create a ".env" file and paste in the following contents:
 
 ```sh
 # this is the ".env" file...
+You must first follow the [setup instructions](https://github.com/prof-rossetti/intro-to-python/blob/main/notes/python/packages/sendgrid.md) to create an account, verify your account, setup a single sender, and obtain an API Key.
 
 ALPHAVANTAGE_API_KEY="_________"
 ```
+SENDGRID_API_KEY="TODO"
+SENDER_ADDRESS="example.gmail.com"
+
 ## Usage
 
 Run the example script:
@@ -33,4 +37,8 @@ pip install -r requirements.txt
 Run the unemployment report:
 ```sh
 python app/unemployment.py
+```
+Send an example email:
+```sh
+python app/email_service.py
 ```
