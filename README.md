@@ -18,8 +18,8 @@ You must first follow the [setup instructions](https://github.com/prof-rossetti/
 
 ALPHAVANTAGE_API_KEY="_________"
 ```
-SENDGRID_API_KEY="TODO"
-SENDER_ADDRESS="example.gmail.com"
+SENDGRID_API_KEY="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"
+SENDER_ADDRESS="sem319@georgetown.edu"
 
 ## Usage
 
@@ -36,7 +36,9 @@ pip install -r requirements.txt
 
 Run the unemployment report:
 ```sh
-python app/unemployment.py
+#python app/unemployment.py
+#when importing we need to change usage command to this: (update your readme accordingly):
+python -m app.unemployment
 ```
 Send an example email:
 ```sh
