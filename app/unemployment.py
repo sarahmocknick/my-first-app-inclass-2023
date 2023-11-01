@@ -14,6 +14,7 @@ from plotly.express import line
 
 from app.email_service import send_email
 
+print("BACK IN UNEMPLOYMENT FILE")
 #Environment variables and constants
 load_dotenv()
 
@@ -79,6 +80,8 @@ rates = [float(d["value"]) for d in data]
 fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", labels= {"x": "Month", "y": "Unemployment Rate"})
 fig.show()
 
+#only want to do if running this file from command line
+# (not if importing a function from this file)
 user_address = input("Please enter your email address: ")
 
 
