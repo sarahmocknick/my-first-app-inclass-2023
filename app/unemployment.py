@@ -7,10 +7,12 @@ import os
 import json
 from pprint import pprint
 from statistics import mean
-#Packages
+#Packages that do need installation via pip
 from dotenv import load_dotenv
 import requests
 from plotly.express import line
+
+from app.email_service import send_email
 
 #Environment variables and constants
 load_dotenv()
@@ -76,3 +78,18 @@ rates = [float(d["value"]) for d in data]
 
 fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", labels= {"x": "Month", "y": "Unemployment Rate"})
 fig.show()
+
+user_address = input("Please enter your email address: ")
+
+
+
+latest_rate = data[0]['value']
+latest_date = data[0]["date"]
+
+content = f"""
+<h1> Unemployment Report Email </h1>
+
+<p> Latest rate: {latest_rate}% as of {latest_date} </p>
+"""
+
+send_email(recipient_address=user_address, html_content=content, subject="Your Unemployment Report")
