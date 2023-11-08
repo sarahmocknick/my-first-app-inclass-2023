@@ -29,73 +29,81 @@ print(API_KEY)
 #stops - doesn't get to anything below but thinks that it is done, it doesn't continue to run or see anything below
 #can also use python -i to make terminal interactive
 
-#Working code
+def fetch_data():
+    #add a DOCSTRING HERE
+    request_url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={API_KEY}"
 
-request_url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={API_KEY}"
+    response = requests.get(request_url)
 
-response = requests.get(request_url)
+    parsed_response = json.loads(response.text)
+    print(type(parsed_response))
+    print(parsed_response.keys())
+    #pprint(parsed_response)
 
-parsed_response = json.loads(response.text)
-print(type(parsed_response))
-print(parsed_response.keys())
-#pprint(parsed_response)
+    data = parsed_response["data"]
+    return data
 
-data = parsed_response["data"]
-
-# Challenge A
-#
-# What is the most recent unemployment rate? And the corresponding date?
-# Display the unemployment rate using a percent sign.
-
-print("-------------------------")
-print("LATEST UNEMPLOYMENT RATE:")
+if __name__ == "__main__":
 
 
+    #Working code
 
-latest_rate = data[0]['value']
-latest_date = data[0]["date"]
-#print(data[0])
-print(f"{latest_rate}%", "as of", latest_date)
+    data = fetch_data()
 
+    # Challenge A
+    #
+    # What is the most recent unemployment rate? And the corresponding date?
+    # Display the unemployment rate using a percent sign.
 
-# Challenge B
-#
-# What is the average unemployment rate for all months during this calendar year?
-# ... How many months does this cover?
+    print("-------------------------")
+    print("LATEST UNEMPLOYMENT RATE:")
 
 
 
-this_year = [d for d in data if "2023-" in d["date"]]
-
-rates_this_year = [float(d["value"]) for d in this_year]
-#print(rates_this_year)
-
-print("-------------------------")
-print("AVG UNEMPLOYMENT THIS YEAR:", f"{round(mean(rates_this_year), 2)}%")
-print("NO MONTHS:", len(this_year))
-
-# Challenge C
-#
-# Plot a line chart of unemployment rates over time.
+    latest_rate = data[0]['value']
+    latest_date = data[0]["date"]
+    #print(data[0])
+    print(f"{latest_rate}%", "as of", latest_date)
 
 
-dates = [d["date"] for d in data]
-rates = [float(d["value"]) for d in data]
-
-fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", labels= {"x": "Month", "y": "Unemployment Rate"})
-fig.show()
-
-#only want to do if running this file from command line
-# (not if importing a function from this file)
-user_address = input("Please enter your email address: ")
+    # Challenge B
+    #
+    # What is the average unemployment rate for all months during this calendar year?
+    # ... How many months does this cover?
 
 
 
+    this_year = [d for d in data if "2023-" in d["date"]]
 
-content = f"""
-<h1> Unemployment Report Email </h1>
+    rates_this_year = [float(d["value"]) for d in this_year]
+    #print(rates_this_year)
 
-<p> Latest rate: {latest_rate}% as of {latest_date} </p>
-"""
+    print("-------------------------")
+    print("AVG UNEMPLOYMENT THIS YEAR:", f"{round(mean(rates_this_year), 2)}%")
+    print("NO MONTHS:", len(this_year))
 
-send_email(recipient_address=user_address, html_content=content, subject="Your Unemployment Report")
+    # Challenge C
+    #
+    # Plot a line chart of unemployment rates over time.
+
+
+    dates = [d["date"] for d in data]
+    rates = [float(d["value"]) for d in data]
+
+    fig = line(x=dates, y=rates, title="United States Unemployment Rate over time", labels= {"x": "Month", "y": "Unemployment Rate"})
+    fig.show()
+
+    #only want to do if running this file from command line
+    # (not if importing a function from this file)
+    user_address = input("Please enter your email address: ")
+
+
+
+
+    content = f"""
+    <h1> Unemployment Report Email </h1>
+
+    <p> Latest rate: {latest_rate}% as of {latest_date} </p>
+    """
+
+    send_email(recipient_address=user_address, html_content=content, subject="Your Unemployment Report")
