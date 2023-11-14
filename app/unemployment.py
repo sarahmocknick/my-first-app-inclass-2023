@@ -30,7 +30,9 @@ print(API_KEY)
 #can also use python -i to make terminal interactive
 
 def fetch_data():
-    #add a DOCSTRING HERE
+    '''This function gets our data from the url 
+    and returns it
+    '''
     request_url = f"https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey={API_KEY}"
 
     response = requests.get(request_url)
