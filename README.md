@@ -16,7 +16,7 @@ Create a ".env" file and paste in the following contents:
 # this is the ".env" file...
 You must first follow the [setup instructions](https://github.com/prof-rossetti/intro-to-python/blob/main/notes/python/packages/sendgrid.md) to create an account, verify your account, setup a single sender, and obtain an API Key.
 
-ALPHAVANTAGE_API_KEY="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"
+ALPHAVANTAGE_API_KEY="_______"
 ```
 SENDGRID_API_KEY="TODO"
 SENDER_ADDRESS="example.gmail.com"
